@@ -12,6 +12,7 @@ function curry(fn, n){
 			return newArgs.length >= length ? fn.apply(this, newArgs) : curried(newArgs);
 		};
 
+		// use correct toString method for debug purposes
 		curriedFn.toString = fn.toString.bind(fn);
 
 		return curriedFn;
@@ -63,3 +64,16 @@ function ternary(fn){
 		return fn(a, b, c);
 	};
 }
+
+module.exports = {
+	partial: partial,
+	curry: curry,
+	spread: spread,
+	compose: compose,
+	identity: identity,
+	constant: constant,
+	nullary: nullary,
+	unary: unary,
+	binary: binary,
+	ternary: ternary
+};
