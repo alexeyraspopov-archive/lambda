@@ -1,0 +1,26 @@
+{
+  "name": "dgelong.lambda",
+  "version": "0.0.0",
+  "description": "General functional operators",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dgelong/lambda.git"
+  },
+  "keywords": [
+    "functional",
+    "operators",
+    "curry",
+    "partial",
+    "compose"
+  ],
+  "author": "Alexey Raspopov <avenger7x13@gmail.com> (https://github.com/alexeyraspopov)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dgelong/lambda/issues"
+  },
+  "homepage": "https://github.com/dgelong/lambda"
+}
