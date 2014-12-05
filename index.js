@@ -3,7 +3,7 @@ function partial(fn, args){
 }
 
 function curry(fn, n){
-	var length = n || fn.length;
+	var length = typeof n === 'undefined' ? fn.length : n;
 
 	return function curried(args){
 		var curriedFn = function(){
@@ -13,7 +13,7 @@ function curry(fn, n){
 		};
 
 		// use correct toString method for debug purposes
-		curriedFn.toString = fn.toString.bind(fn);
+		curriedFn.toString = function(){ return 'curried ' + fn.toString(); };
 
 		return curriedFn;
 	}([]);
