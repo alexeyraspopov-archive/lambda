@@ -6,14 +6,15 @@ function curry(fn, n){
 	var length = n || fn.length;
 
 	return function curried(args){
-		var c = function(){
+		var curriedFn = function(){
 			var newArgs = args.concat([].slice.call(arguments));
 
 			return newArgs.length >= length ? fn.apply(this, newArgs) : curried(newArgs);
 		};
 
-		c.toString = fn.toString.bind(fn);
-		return c;
+		curriedFn.toString = fn.toString.bind(fn);
+
+		return curriedFn;
 	}([]);
 }
 
