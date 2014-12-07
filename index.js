@@ -19,8 +19,10 @@ function curry(fn, n){
 	}([]);
 }
 
-function flip(){
-
+function flip(fn){
+	return function(){
+		fn.apply(this, [].reverse.call(arguments));
+	};
 }
 
 function spread(fn){
