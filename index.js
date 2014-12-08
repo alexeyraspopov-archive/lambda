@@ -1,3 +1,6 @@
+var slice = Array.prototype.slice,
+	reverse = Array.prototype.reverse;
+
 function partial(fn, args){
 	return fn.bind.apply(fn, [this].concat(args));
 }
@@ -7,13 +10,15 @@ function curry(fn, n){
 
 	return function curried(args){
 		var curriedFn = function(){
-			var newArgs = args.concat([].slice.call(arguments));
+			var newArgs = args.concat(slice.call(arguments));
 
 			return newArgs.length >= length ? fn.apply(this, newArgs) : curried(newArgs);
 		};
 
 		// use correct toString method for debug purposes
-		curriedFn.toString = function(){ return 'curried ' + fn.toString(); };
+		curriedFn.toString = function(){
+			return 'curried ' + fn.toString();
+		};
 
 		return curriedFn;
 	}([]);
@@ -21,7 +26,7 @@ function curry(fn, n){
 
 function flip(fn){
 	return function(){
-		fn.apply(this, [].reverse.call(arguments));
+		fn.apply(this, reverse.call(arguments));
 	};
 }
 
@@ -40,7 +45,9 @@ function identity(a){
 }
 
 function constant(a){
-	return partial(identity, a);
+	return function(){
+		return a;
+	};
 }
 
 function nullary(fn){
@@ -70,6 +77,7 @@ function ternary(fn){
 module.exports = {
 	partial: partial,
 	curry: curry,
+	flip: flip,
 	spread: spread,
 	compose: compose,
 	identity: identity,
