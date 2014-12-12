@@ -50,6 +50,18 @@ function constant(a){
 	};
 }
 
+function memoize(fn, hash){
+	var memo = {};
+
+	hash = hash || identity;
+
+	return function(){
+		var key = hash.apply(this, arguments);
+
+		return memo.hasOwnProperty(key) ? memo[key] : (memo[key] = fn.apply(this, arguments));
+	};
+};
+
 function nullary(fn){
 	return function(){
 		return fn();
@@ -82,6 +94,7 @@ module.exports = {
 	compose: compose,
 	identity: identity,
 	constant: constant,
+	memoize: memoize,
 	nullary: nullary,
 	unary: unary,
 	binary: binary,
