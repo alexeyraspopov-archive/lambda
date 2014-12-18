@@ -60,7 +60,18 @@ function memoize(fn, hash){
 
 		return memo.hasOwnProperty(key) ? memo[key] : (memo[key] = fn.apply(this, arguments));
 	};
-};
+}
+
+function trampoline(fn){
+	var args = slice.call(arguments, 1),
+		result = fn.apply(this, args);
+
+	while(result instanceof Function){
+		result = result();
+	}
+
+	return result;
+}
 
 function nullary(fn){
 	return function(){
@@ -95,6 +106,7 @@ module.exports = {
 	identity: identity,
 	constant: constant,
 	memoize: memoize,
+	trampoline: trampoline,
 	nullary: nullary,
 	unary: unary,
 	binary: binary,
